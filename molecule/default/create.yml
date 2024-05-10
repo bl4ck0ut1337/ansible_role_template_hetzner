@@ -14,7 +14,7 @@
         image: "{{ item.image }}"
         location: fsn1
         ssh_keys:
-          - mklein
+          - molecule
         api_token: "{{ hetzner_api_token }}"
         state: present
       register: vm_output
