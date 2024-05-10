@@ -1,0 +1,16 @@
+---
+- name: CONVERGE
+  hosts: all
+  become: true
+  gather_facts: true
+  vars:
+    ansible_ssh_common_args: " -F /tmp/ssh_config -o StrictHostKeychecking=no"
+  pre_tasks:
+    - name: Update Packages
+      ansible.builtin.package:
+        name: "*"
+        state: latest
+        update_cache: true
+  tasks:
+    - ansible.builtin.include_role:
+        name: author.template

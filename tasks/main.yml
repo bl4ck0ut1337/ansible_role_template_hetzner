@@ -1,0 +1,10 @@
+---
+# tasks file
+
+- name: TEMPLATE
+  tags:
+    - ansible
+  block:
+    - name: "Template"
+      ansible.builtin.debug:
+        msg: "Ansible Role Template"

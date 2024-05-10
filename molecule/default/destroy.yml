@@ -1,0 +1,21 @@
+---
+- name: DESTROY
+  hosts: localhost
+  connection: local
+  vars_files:
+    - ./vault.yml
+  vars:
+    ansible_ssh_common_args: " -F /tmp/ssh_config -o StrictHostKeychecking=no"
+  tasks:
+    - name: Destroy test instances
+      hetzner.hcloud.server:
+        name: "{{ item.name }}"
+        api_token: "{{ hetzner_api_token }}"
+        state: absent
+      with_items:
+        - { name: molecule-test-vm-ubuntu24, image: ubuntu-24.04 }
+        - { name: molecule-test-vm-ubuntu22, image: ubuntu-22.04 }
+        - { name: molecule-test-vm-debian11, image: debian-11 }
+        - { name: molecule-test-vm-debian12, image: debian-12 }
+        - { name: molecule-test-vm-rocky8, image: rocky-8 }
+        - { name: molecule-test-vm-rocky9, image: rocky-9 }

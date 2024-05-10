@@ -1,0 +1,38 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: default
+verifier:
+  name: ansible
+platforms:
+  - name: molecule-test-vm-ubuntu22
+    image: "ubuntu-22.04"
+  - name: molecule-test-vm-ubuntu24
+    image: "ubuntu-24.04"
+  - name: molecule-test-vm-debian11
+    image: "debian-11"
+  - name: molecule-test-vm-debian12
+    image: "debian-12"
+  - name: molecule-test-vm-rocky8
+    image: "rocky-8"
+  - name: molecule-test-vm-rocky9
+    image: "rocky-9"
+scenario:
+  name: default
+  test_sequence:
+    - destroy
+    - create
+    - converge
+    - verify
+    - destroy
+provisioner:
+  name: ansible
+  config_options:
+    defaults:
+      vault_password_file: "${MOLECULE_SCENARIO_DIRECTORY}/.vaultpass"
+  connection_options:
+    ansible_ssh_common_args: " -F /tmp/ssh_config -o StrictHostKeychecking=no"
+lint: |
+  set -e
+  ansible-lint --exclude molecule/default/
