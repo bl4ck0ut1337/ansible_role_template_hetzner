@@ -32,7 +32,7 @@ provisioner:
     defaults:
       vault_password_file: "${MOLECULE_SCENARIO_DIRECTORY}/.vaultpass"
   connection_options:
-    ansible_ssh_common_args: " -F /tmp/ssh_config -o StrictHostKeychecking=no"
+    ansible_ssh_common_args: " -F /tmp/ssh_config -o StrictHostKeyChecking=no"
 lint: |
   set -e
   ansible-lint --exclude molecule/default/
