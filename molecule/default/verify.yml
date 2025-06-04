@@ -3,7 +3,7 @@
   hosts: all
   become: true
   vars:
-    ansible_ssh_common_args: " -F /tmp/ssh_config -o StrictHostKeychecking=no"
+    ansible_ssh_common_args: " -F /tmp/ssh_config -o StrictHostKeyChecking=no"
   tasks:
     - name: PING
       ansible.builtin.ping:
