@@ -7,3 +7,13 @@
   tasks:
     - name: PING
       ansible.builtin.ping:
+
+    - name: Include author.template role
+      ansible.builtin.include_role:
+        name: author.template
+      register: role_result
+
+    - name: Verify role output
+      ansible.builtin.assert:
+        that:
+          - "'Ansible Role Template' in (role_result.results | map(attribute='msg') | join(' '))"
